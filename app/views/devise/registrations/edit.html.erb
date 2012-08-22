@@ -1,0 +1,23 @@
+<h2>Изменение параметров профиля</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :name, 'Имя' %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password, 'Новый пароль' %> <i>(оставьте пустым, если не хотите менять)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation, 'Подтверждение пароля' %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :current_password, 'Текущий пароль' %> <i>(необходим для подтверждения изменений)</i><br />
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "Обновить" %> &nbsp; <%= link_to 'Назад', events_path, class: 'btn' %></div>
+<% end %>
+

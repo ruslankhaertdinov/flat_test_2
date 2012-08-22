@@ -1,0 +1,10 @@
+После того, как проект булет скачан на локальную машину, переходим в папку с проектом и выполняем:
+1. bundle install
+2. rake db:migrate
+3. rake db:seed
+
+Будут созданы 2 тестовых пользователя:
+ - ruslanimos@gmail.com (пароль: ruslanimos@gmail.com)
+ - ruslanimos_2@gmail.com (пароль: ruslanimos_2@gmail.com)
+
+И несколько связанных с ними тестовых событий.
