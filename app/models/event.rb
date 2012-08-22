@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => :user_id, message: 'дублирование события'
   validates_length_of :title, in: 3..64, too_long: 'не более 64 символов', too_short: 'не менее 3 символов'
   validates_inclusion_of :repeat, :in => 0..4, message: 'выберите значение из списка'
-  validates_format_of :date, :with => /\A\d{4}(\-\d{2}){2}\z/, :message => 'в формате 31.12.2012'
+  validates_format_of :date, :with => /\A\d{4}(\-\d{2}){2}\z/, :message => "в формате: '2012-12-31'"
 
   attr_accessible :title, :date, :repeat, :cal_day, :month, :weekday
 

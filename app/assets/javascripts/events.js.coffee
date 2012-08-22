@@ -46,7 +46,7 @@ $ ->
         maxlength: "Поле не может содержать более 64 символов"
       "event[date]":
         required: "Выберите дату"
-        date_validate: "В формате: '31.12.2012'"
+        date_validate: "В формате: '2012-12-31'"
 
     errorPlacement: (error, element) ->
       error.insertAfter(element)
