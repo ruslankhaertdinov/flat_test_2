@@ -55,3 +55,28 @@ Event.create! do |ev|
   ev.cal_day = '15'
   ev.user_id = '1'
 end
+
+Event.create! do |ev|
+  ev.title = 'День знаний'
+  ev.date = '01.09.2011'
+  ev.repeat = '4'
+  ev.cal_day = '1'
+  ev.month = '9'
+  ev.user_id = '1'
+end
+
+Event.create! do |ev|
+  ev.title = 'Международный женский день'
+  ev.date = '08.03.2012'
+  ev.repeat = '4'
+  ev.cal_day = '8'
+  ev.month = '3'
+  ev.user_id = '2'
+end
+
+Event.create! do |ev|
+  ev.title = 'Распродажа в супермаркете'
+  ev.date = '10.10.2012'
+  ev.repeat = '0'
+  ev.user_id = '2'
+end
