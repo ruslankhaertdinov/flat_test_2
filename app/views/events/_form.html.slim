@@ -29,7 +29,7 @@
                 =f.submit(value: 'Сохранить', class: 'btn btn-primary')
                 span &nbsp;
                 -if params['action'] == 'new'
-                  =link_to 'Назад', events_path, class: 'btn'
+                    =link_to 'Назад', events_path, class: 'btn'
                 -if params['action'] == 'edit'
-                  = link_to 'Удалить', @event, :confirm => 'Вы уверены?', :method => :delete, class: 'btn btn-danger'
+                    =link_to 'Удалить', @event, :confirm => 'Вы уверены?', :method => :delete, class: 'btn btn-danger'
 

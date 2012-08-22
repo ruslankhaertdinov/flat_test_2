@@ -1,0 +1,30 @@
+-if flash[:notice].present?
+  .alert.fade.in
+    button(type="button" class="close" data-dismiss="alert") ×
+    =flash[:notice]
+
+.row
+  .span4.offset2
+
+    =form_for :date, url: events_url, method: :get, html: { class: 'well', id: 'dateFilterForm' } do |f|
+      #event_date_selector
+      = f.hidden_field :filter
+      = f.hidden_field :target_date, value: @target_date
+      = f.select :output_opt, {'На указанную дату' => 0, 'Все мои события' => 1, 'Все события' => 2}, selected: @selected_output
+      =link_to 'Создать новое событие', new_event_path, :class => 'btn btn-success', :id => 'create_event'
+
+  .span8
+    table.table.table-bordered.table-striped
+      thead
+        tr
+          th Событие
+          th.date Дата
+          th.owner Пользователь
+      tbody
+        -if @events.present?
+          -@events.each do |e|
+            tr
+              td #{link_to e.title, edit_event_path(e.id)}
+              td #{@target_date.nil? ? correct_date(e).strftime("%d-%m-%Y") : @target_date.strftime("%d-%m-%Y")}
+              td #{event_owner(e)}
+    = paginate @events
