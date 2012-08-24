@@ -5,3 +5,4 @@ log/*.log
 /.rvmrc
 tmp
 db/*.sqlite3
+.gitignore

@@ -25,7 +25,7 @@
             <a href="#" data-toggle="dropdown" class="btn dropdown-toggle">
               <i class="icon-user"></i>
               <%- if current_user.name.present? %>
-                  <%= current_user.name %>
+                  <%= current_user.name.truncate(15) %>
               <%- else %>
                   <%= current_user.email %>
               <% end %>
