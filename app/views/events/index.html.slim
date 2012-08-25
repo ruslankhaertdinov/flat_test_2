@@ -26,5 +26,5 @@
             tr
               td #{link_to e.title, edit_event_path(e.id)}
               td #{@target_date.nil? ? correct_date(e).strftime("%d-%m-%Y") : @target_date.strftime("%d-%m-%Y")}
-              td #{event_owner(e)}
+              td #{event_owner(e).truncate(25)}
     = paginate @events
