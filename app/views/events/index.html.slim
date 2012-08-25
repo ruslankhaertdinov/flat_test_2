@@ -11,7 +11,7 @@
       = f.hidden_field :filter
       = f.hidden_field :target_date, value: @target_date
       = f.select :output_opt, {'На указанную дату' => 0, 'Все мои события' => 1, 'Все события' => 2}, selected: @selected_output
-      =link_to 'Создать новое событие', new_event_path, :class => 'btn btn-success', :id => 'create_event'
+      =link_to 'Создать новое событие', new_event_path, class: 'btn btn-success', id: 'create_event'
 
   .span8
     table.table.table-bordered.table-striped
