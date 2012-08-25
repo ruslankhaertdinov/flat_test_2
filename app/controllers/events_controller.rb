@@ -12,11 +12,6 @@ class EventsController < ApplicationController
     @selected_output = (params[:date] && params[:date][:output_opt]) || 1
     @events = get_events(params)
     @events = Kaminari.paginate_array(@events).page(params[:page]).per(7)
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
 
@@ -40,6 +35,7 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.where(id: params[:id], user_id: current_user.id).first
+
     unless @event
       flash[:notice] = 'Вы можете редактировать только свои события'
       redirect_to :back
@@ -48,7 +44,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.where(id: params[:id], user_id: current_user.id).first
-    render_404() and return unless @event
+    render_404 and return unless @event
     split_date(@event)
 
     if @event.update_attributes(params[:event])
@@ -67,7 +63,6 @@ class EventsController < ApplicationController
   end
 
   private
-
   def split_date(event)
     date = event[:date].to_date
 
@@ -100,13 +95,12 @@ class EventsController < ApplicationController
         events.concat(Event.where('date < ? AND repeat = 1 AND user_id = ?', @target_date, current_user.id)) #ежедневный повтор
         events.concat(Event.where('date < ? AND weekday = ? AND repeat = 2 AND user_id = ?', @target_date, @target_date.cwday, current_user.id)) #еженедельный повтор
         events.concat(Event.where('date < ? AND cal_day = ? AND repeat = 3 AND user_id = ?', @target_date, @target_date.day, current_user.id)) #ежемесячный повтор
-        events.concat(Event.where('date < ? AND cal_day = ? AND month = ? AND repeat = 4 AND user_id = ?', @target_date, @target_date.day, @target_date.month, current_user.id)) #ежемесячный повтор
+        events.concat(Event.where('date < ? AND cal_day = ? AND month = ? AND repeat = 4 AND user_id = ?', @target_date, @target_date.day, @target_date.month, current_user.id)) #ежегодный повтор
       when Event::DISPLAY_ALL
         events = Event.all
     end
 
     return events
   end
-
 end
 
