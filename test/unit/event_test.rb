@@ -20,15 +20,11 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'validates_uniqueness_of :title, scope: :user_id' do
-    event = Event.new
-    event.title = 'Новый год'
-    event.date = '31.12.2012'
+    event = Event.new(title: 'Новый год', date: '31.12.2012')
     event.user_id = '1'
     event.save
 
-    event = Event.new
-    event.title = 'Новый год'
-    event.date = '31.12.2012'
+    event = Event.new(title: 'Новый год', date: '31.12.2012')
     event.user_id = '1'
     assert !event.save
 
@@ -37,18 +33,18 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'validates_length_of :title, in: 3..64' do
-    event = Event.new(title: 't', date: '2012-12-31')
+    event = Event.new(date: '2012-12-31')
     event.user_id = '1'
-    assert !event.save
 
-    event.title = 't' * 65
-    assert !event.save
+    ['t' * 65, 't'].each do |t|
+      event.title = t
+      assert !event.save
+    end
 
-    event.title = 't' * 3
-    assert event.save
-
-    event.title = 't' * 64
-    assert event.save
+    ['t' * 3, 't' * 64].each do |t|
+      event.title = t
+      assert event.save
+    end
   end
 
   test 'validates_inclusion_of :repeat in: 0..4' do
