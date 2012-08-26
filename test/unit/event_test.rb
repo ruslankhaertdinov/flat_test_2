@@ -65,15 +65,4 @@ class EventTest < ActiveSupport::TestCase
       assert !event.save
     end
   end
-
-  test 'validates_format_of :date' do
-    event = Event.new do |ev|
-      ev.title = 'Новый год'
-      ev.date = '2012.12.31'
-      ev.user_id = '1'
-    end
-
-    assert event.save
-  end
-
 end
