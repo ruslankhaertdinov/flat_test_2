@@ -17,10 +17,5 @@
 //= require bootstrap/bootstrap-alert.js
 //= require datepicker/jquery-ui-1.8.23.custom.min.js
 //= require datepicker/jquery.ui.datepicker-ru.js
-
 //= require table_sorter/jquery.tablesorter
 
-
-//jQuery.validator.addMethod("date_validate", function(date, element) {
-//    return this.optional(element) || date.match(/^\d{2}\.\d{2}\.\d{4}$/);
-//});

@@ -22,7 +22,7 @@ datepicker/jquery-ui-1.8.23.custom.min.js: datepicker/jquery-ui-1.8.23.custom.mi
 datepicker/jquery.ui.datepicker-ru.js: datepicker/jquery.ui.datepicker-ru-b4e0fe321a49edfdb1634120f9afeec8.js
 devise/registrations.js: devise/registrations-71c9eaf3c06bffedf041f8d52c511254.js
 devise/sessions.js: devise/sessions-71c9eaf3c06bffedf041f8d52c511254.js
-events.js: events-6cafe403cc7c5b4bfa196192a21a09cc.js
+events.js: events-e786e1f4a28f0bd31cb8707470006aa3.js
 jquery.validate.js: jquery.validate-b108af7585665d7da5ba3f444c3d9141.js
 table_sorter/jquery.tablesorter.js: table_sorter/jquery.tablesorter-28f48b4bbade59348aae219effcace4a.js
 application.css: application-07c538f471fab525321289cf172fb4aa.css

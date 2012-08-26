@@ -14,13 +14,14 @@ $ ->
 
 
   $("#event_date").datepicker
+    dateFormat: "yy-mm-dd"
     changeMonth: true
     changeYear: true
     showOtherMonths: true
     selectOtherMonths: true
-    dateFormat: "yy-mm-dd"
 
-#  при клике на форму проверять валидацию
+
+  #  при клике на форму проверять валидацию
   $('#event_date, #event_title').click ->
     validator = $("form").validate()
     validator.resetForm()
