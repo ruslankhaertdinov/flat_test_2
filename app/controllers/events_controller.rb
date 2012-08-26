@@ -38,7 +38,7 @@ class EventsController < ApplicationController
 
     unless @event
       flash[:notice] = 'Вы можете редактировать только свои события'
-      redirect_to :back
+      redirect_to :events
     end
   end
 
