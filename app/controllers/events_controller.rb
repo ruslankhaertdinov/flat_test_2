@@ -22,9 +22,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.user_id = current_user.id
-    split_date(@event)
 
     if @event.save
+      split_date(@event)
       flash[:notice] = 'Событие успешно сохранено'
       redirect_to root_url
     else
@@ -75,6 +75,8 @@ class EventsController < ApplicationController
         event.cal_day = date.day
         event.month = date.month
     end
+
+    event.save
   end
 
   def get_target_date(params)
