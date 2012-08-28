@@ -5,11 +5,11 @@ class EventsController < ApplicationController
 
 
   def index
-    if params[:date] and params[:date][:output_opt] == Events::DISPLAY_FIXED_DATE
+    if params[:date] and params[:date][:output_opt] == Event::DISPLAY_FIXED_DATE
       @target_date = get_target_date(params)
     end
 
-    @selected_output = (params[:date] && params[:date][:output_opt]) || Events::DISPLAY_MY_EVENTS
+    @selected_output = (params[:date] && params[:date][:output_opt]) || Event::DISPLAY_MY_EVENTS
     @events = get_events(params)
     @events = Kaminari.paginate_array(@events).page(params[:page]).per(7)
   end
