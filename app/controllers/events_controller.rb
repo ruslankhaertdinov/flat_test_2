@@ -5,11 +5,11 @@ class EventsController < ApplicationController
 
 
   def index
-    if params[:date] and params[:date][:output_opt] == '0'
+    if params[:date] and params[:date][:output_opt] == Events::DISPLAY_FIXED_DATE
       @target_date = get_target_date(params)
     end
 
-    @selected_output = (params[:date] && params[:date][:output_opt]) || 1
+    @selected_output = (params[:date] && params[:date][:output_opt]) || Events::DISPLAY_MY_EVENTS
     @events = get_events(params)
     @events = Kaminari.paginate_array(@events).page(params[:page]).per(7)
   end
@@ -30,7 +30,6 @@ class EventsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def edit
@@ -45,9 +44,9 @@ class EventsController < ApplicationController
   def update
     @event = Event.where(id: params[:id], user_id: current_user.id).first
     render_404 and return unless @event
-    split_date(@event)
 
     if @event.update_attributes(params[:event])
+      split_date(@event)
       flash[:notice] = 'Событие успешно изменено'
       redirect_to :events
     else
@@ -67,13 +66,13 @@ class EventsController < ApplicationController
     date = event[:date].to_date
 
     case event.repeat
-      when Event::REPEAT_WEEKLY
-        event.weekday = date.cwday
-      when Event::REPEAT_MONTHLY
-        event.cal_day = date.day
-      when Event::REPEAT_YEARLY
-        event.cal_day = date.day
-        event.month = date.month
+    when Event::REPEAT_WEEKLY
+      event.weekday = date.cwday
+    when Event::REPEAT_MONTHLY
+      event.cal_day = date.day
+    when Event::REPEAT_YEARLY
+      event.cal_day = date.day
+      event.month = date.month
     end
 
     event.save
@@ -92,14 +91,14 @@ class EventsController < ApplicationController
     return events unless params[:date] && params[:date][:output_opt]
 
     case params[:date][:output_opt]
-      when Event::DISPLAY_FIXED_DATE
-        events = Event.where('date = ? AND user_id = ?', @target_date, current_user.id)
-        events.concat(Event.where('date < ? AND repeat = 1 AND user_id = ?', @target_date, current_user.id)) #ежедневный повтор
-        events.concat(Event.where('date < ? AND weekday = ? AND repeat = 2 AND user_id = ?', @target_date, @target_date.cwday, current_user.id)) #еженедельный повтор
-        events.concat(Event.where('date < ? AND cal_day = ? AND repeat = 3 AND user_id = ?', @target_date, @target_date.day, current_user.id)) #ежемесячный повтор
-        events.concat(Event.where('date < ? AND cal_day = ? AND month = ? AND repeat = 4 AND user_id = ?', @target_date, @target_date.day, @target_date.month, current_user.id)) #ежегодный повтор
-      when Event::DISPLAY_ALL
-        events = Event.all
+    when Event::DISPLAY_FIXED_DATE
+      events = Event.where('date = ? AND user_id = ?', @target_date, current_user.id)
+      events.concat(Event.where('date < ? AND repeat = 1 AND user_id = ?', @target_date, current_user.id)) #ежедневный повтор
+      events.concat(Event.where('date < ? AND weekday = ? AND repeat = 2 AND user_id = ?', @target_date, @target_date.cwday, current_user.id)) #еженедельный повтор
+      events.concat(Event.where('date < ? AND cal_day = ? AND repeat = 3 AND user_id = ?', @target_date, @target_date.day, current_user.id)) #ежемесячный повтор
+      events.concat(Event.where('date < ? AND cal_day = ? AND month = ? AND repeat = 4 AND user_id = ?', @target_date, @target_date.day, @target_date.month, current_user.id)) #ежегодный повтор
+    when Event::DISPLAY_ALL
+      events = Event.all
     end
 
     return events

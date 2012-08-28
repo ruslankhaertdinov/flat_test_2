@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
   attr_accessible :title, :date, :repeat, :cal_day, :month, :weekday
 
   DISPLAY_ALL = '2'
+  DISPLAY_MY_EVENTS = '1'
   DISPLAY_FIXED_DATE = '0'
 
   SINGLE_EVENT = 0
